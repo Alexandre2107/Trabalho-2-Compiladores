@@ -13,94 +13,94 @@ T_V T_F T_NAO T_ABRE T_FECHA
 %%
 
 
-programa:
-            cabecalho variaveis T_INICIO lista_comandos T_FIM;         
+program:
+            header variables T_INICIO command_list T_FIM {printf("\nProgram recognized successfully!\n");};         
 
-cabecalho:
+header:
             T_PROGRAMA T_IDENTIF;
 
-variaveis:
-            declaracao_variaveis
+variables:
+            variable_declaration
             | 
             ;
 
-declaracao_variaveis:
-            tipo lista_variaveis declaracao_variaveis
-            | tipo lista_variaveis
+variable_declaration:
+            type variable_list variable_declaration
+            | type variable_list
             ;
 
-tipo:
+type:
             T_LOGICO
             | T_INTEIRO
             ;
 
-lista_variaveis:
-            T_IDENTIF lista_variaveis
+variable_list:
+            T_IDENTIF variable_list
             | T_IDENTIF
             ; 
 
-lista_comandos:
-            comando lista_comandos
+command_list:
+            command command_list
             | 
             ;
 
-comando:
-            entrada_saida
-            | repeticao
-            | selecao
-            | atribuicao
+command:
+            input_output
+            | repetition
+            | selection
+            | assignment
             ;
 
-entrada_saida:
-            leitura | escrita
+input_output:
+            read | write
             |
             ;
 
-leitura:
+read:
             T_LEIA T_IDENTIF
             |
             ;
 
-escrita:
-            T_ESCREVA expressao
+write:
+            T_ESCREVA expression
             |
             ;
 
-repeticao:
-            T_ENQTO expressao T_FACA lista_comandos T_FIMENQTO
+repetition:
+            T_ENQTO expression T_FACA command_list T_FIMENQTO
             |
             ;
 
-atribuicao:
-        T_IDENTIF T_ATRIB expressao
+assignment:
+        T_IDENTIF T_ATRIB expression
         |
         ;
 
-selecao:
-            T_SE expressao T_ENTAO lista_comandos T_SENAO lista_comandos T_FIMSE
+selection:
+            T_SE expression T_ENTAO command_list T_SENAO command_list T_FIMSE
             |
             ;
 
-expressao:
-            expressao T_VEZES expressao
-            | expressao T_DIV expressao
-            | expressao T_MAIS expressao
-            | expressao T_MENOS expressao
-            | expressao T_MAIOR expressao
-            | expressao T_MENOR expressao
-            | expressao T_IGUAL expressao
-            | expressao T_E expressao
-            | expressao T_OU expressao
-            | termo
+expression:
+            expression T_VEZES expression
+            | expression T_DIV expression
+            | expression T_MAIS expression
+            | expression T_MENOS expression
+            | expression T_MAIOR expression
+            | expression T_MENOR expression
+            | expression T_IGUAL expression
+            | expression T_E expression
+            | expression T_OU expression
+            | term
             ;
 
-termo:
+term:
             T_IDENTIF
             | T_NUMERO
             | T_V
             | T_F
-            | T_NAO termo
-            | T_ABRE expressao T_FECHA
+            | T_NAO term
+            | T_ABRE expression T_FECHA
             ;
 
 %%
@@ -114,9 +114,8 @@ void yyerror(char *s){
 int main(void){
     FILE *fp;
     int i;
-    fp = fopen("./avaliacao.simples", "r");
+    fp = fopen("./teste.txt", "r");
     yyin = fp;
     yyparse();
     return 0;
 }
-

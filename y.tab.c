@@ -72,9 +72,10 @@
     #include<stdio.h>
     void yyerror(char *);
     int yylex(void);
+    
     extern FILE *yyin;
 
-#line 78 "y.tab.c"
+#line 79 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -243,22 +244,22 @@ enum yysymbol_kind_t
   YYSYMBOL_T_ABRE = 32,                    /* T_ABRE  */
   YYSYMBOL_T_FECHA = 33,                   /* T_FECHA  */
   YYSYMBOL_YYACCEPT = 34,                  /* $accept  */
-  YYSYMBOL_programa = 35,                  /* programa  */
-  YYSYMBOL_cabecalho = 36,                 /* cabecalho  */
-  YYSYMBOL_variaveis = 37,                 /* variaveis  */
-  YYSYMBOL_declaracao_variaveis = 38,      /* declaracao_variaveis  */
-  YYSYMBOL_tipo = 39,                      /* tipo  */
-  YYSYMBOL_lista_variaveis = 40,           /* lista_variaveis  */
-  YYSYMBOL_lista_comandos = 41,            /* lista_comandos  */
-  YYSYMBOL_comando = 42,                   /* comando  */
-  YYSYMBOL_entrada_saida = 43,             /* entrada_saida  */
-  YYSYMBOL_leitura = 44,                   /* leitura  */
-  YYSYMBOL_escrita = 45,                   /* escrita  */
-  YYSYMBOL_repeticao = 46,                 /* repeticao  */
-  YYSYMBOL_atribuicao = 47,                /* atribuicao  */
-  YYSYMBOL_selecao = 48,                   /* selecao  */
-  YYSYMBOL_expressao = 49,                 /* expressao  */
-  YYSYMBOL_termo = 50                      /* termo  */
+  YYSYMBOL_program = 35,                   /* program  */
+  YYSYMBOL_header = 36,                    /* header  */
+  YYSYMBOL_variables = 37,                 /* variables  */
+  YYSYMBOL_variable_declaration = 38,      /* variable_declaration  */
+  YYSYMBOL_type = 39,                      /* type  */
+  YYSYMBOL_variable_list = 40,             /* variable_list  */
+  YYSYMBOL_command_list = 41,              /* command_list  */
+  YYSYMBOL_command = 42,                   /* command  */
+  YYSYMBOL_input_output = 43,              /* input_output  */
+  YYSYMBOL_read = 44,                      /* read  */
+  YYSYMBOL_write = 45,                     /* write  */
+  YYSYMBOL_repetition = 46,                /* repetition  */
+  YYSYMBOL_assignment = 47,                /* assignment  */
+  YYSYMBOL_selection = 48,                 /* selection  */
+  YYSYMBOL_expression = 49,                /* expression  */
+  YYSYMBOL_term = 50                       /* term  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -647,11 +648,11 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    16,    16,    19,    22,    23,    27,    28,    32,    33,
-      37,    38,    42,    43,    47,    48,    49,    50,    54,    54,
-      55,    59,    60,    64,    65,    69,    70,    74,    75,    79,
-      80,    84,    85,    86,    87,    88,    89,    90,    91,    92,
-      93,    97,    98,    99,   100,   101,   102
+       0,    17,    17,    20,    23,    24,    28,    29,    33,    34,
+      38,    39,    43,    44,    48,    49,    50,    51,    55,    55,
+      56,    60,    61,    65,    66,    70,    71,    75,    76,    80,
+      81,    85,    86,    87,    88,    89,    90,    91,    92,    93,
+      94,    98,    99,   100,   101,   102,   103
 };
 #endif
 
@@ -672,10 +673,10 @@ static const char *const yytname[] =
   "T_ESCREVA", "T_ENQTO", "T_FACA", "T_FIMENQTO", "T_ATRIB", "T_SE",
   "T_ENTAO", "T_SENAO", "T_FIMSE", "T_VEZES", "T_DIV", "T_MAIS", "T_MENOS",
   "T_MAIOR", "T_MENOR", "T_IGUAL", "T_E", "T_OU", "T_NUMERO", "T_V", "T_F",
-  "T_NAO", "T_ABRE", "T_FECHA", "$accept", "programa", "cabecalho",
-  "variaveis", "declaracao_variaveis", "tipo", "lista_variaveis",
-  "lista_comandos", "comando", "entrada_saida", "leitura", "escrita",
-  "repeticao", "atribuicao", "selecao", "expressao", "termo", YY_NULLPTR
+  "T_NAO", "T_ABRE", "T_FECHA", "$accept", "program", "header",
+  "variables", "variable_declaration", "type", "variable_list",
+  "command_list", "command", "input_output", "read", "write", "repetition",
+  "assignment", "selection", "expression", "term", YY_NULLPTR
 };
 
 static const char *
@@ -1263,8 +1264,14 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
+  case 2: /* program: header variables T_INICIO command_list T_FIM  */
+#line 17 "decl.y"
+                                                         {printf("\nProgram recognized successfully!\n");}
+#line 1271 "y.tab.c"
+    break;
 
-#line 1268 "y.tab.c"
+
+#line 1275 "y.tab.c"
 
       default: break;
     }
@@ -1457,7 +1464,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 105 "decl.y"
+#line 106 "decl.y"
 
 
 
@@ -1469,9 +1476,8 @@ void yyerror(char *s){
 int main(void){
     FILE *fp;
     int i;
-    fp = fopen("./avaliacao.simples", "r");
+    fp = fopen("./teste.txt", "r");
     yyin = fp;
     yyparse();
     return 0;
 }
-

@@ -58,7 +58,6 @@ F {printf("%11s:_constante_logica_de_falsidade: T_F;\n",yytext); return T_F;}
 "/*" BEGIN(comentario);
 <comentario>"*/" BEGIN(INITIAL);
 <comentario>.    /* nao faz nada */
-. printf("%11s:_ERRO_SIMBOLO_NAO_RECONHECIDO!: ERRO LEXICO\n",yytext);
 
 %%
 
